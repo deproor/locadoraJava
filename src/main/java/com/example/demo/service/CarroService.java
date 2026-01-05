@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.CarroDTO;
 import com.example.demo.dto.CarroRequest;
 import com.example.demo.model.Carro;
 import com.example.demo.repository.CarroRepository;
@@ -44,5 +45,11 @@ public class CarroService {
 
         carro.setDisponivel(true);
         return repository.save(carro);
+    }
+
+    public List<CarroDTO> buscarPorMarca(String marca) {
+        return repository.findByMarcaIgnoreCase(marca).stream()
+                .map(carro -> new CarroDTO(carro.getModelo(), carro.getMarca(), carro.isDisponivel()))
+                .toList();
     }
 }

@@ -37,4 +37,9 @@ public class CarroController {
     public Carro devolver(@PathVariable Long id) {
         return service.devolver(id);
     }
+
+    @GetMapping("/buscar")
+    public List<CarroDTO> buscarPorMarca(@RequestParam String marca) {
+        return service.buscarPorMarca(marca);
+    }
 }
