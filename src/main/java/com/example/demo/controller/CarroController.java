@@ -5,6 +5,7 @@ import com.example.demo.dto.CarroRequest;
 import com.example.demo.model.Carro;
 import com.example.demo.service.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -41,5 +42,11 @@ public class CarroController {
     @GetMapping("/buscar")
     public List<CarroDTO> buscarPorMarca(@RequestParam String marca) {
         return service.buscarPorMarca(marca);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        service.deletar(id);
+        return ResponseEntity.noContent().build(); // Retorna o código 204 (Sucesso, mas sem conteúdo)
     }
 }

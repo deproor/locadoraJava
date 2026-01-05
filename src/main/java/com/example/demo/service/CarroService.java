@@ -47,6 +47,13 @@ public class CarroService {
         return repository.save(carro);
     }
 
+    public void deletar(Long id) {
+        if (!repository.existsById(id)) {
+            throw new RuntimeException("Carro não encontrado para exclusão!");
+        }
+        repository.deleteById(id);
+    }
+
     public List<CarroDTO> buscarPorMarca(String marca) {
         return repository.findByMarcaIgnoreCase(marca).stream()
                 .map(carro -> new CarroDTO(carro.getModelo(), carro.getMarca(), carro.isDisponivel()))
